@@ -189,7 +189,7 @@ if (GNUPLOT_FOUND AND BUILD_ACCURACY)
   add_custom_target(fpm-accuracy-images DEPENDS ${IMG_FILES_ACCURACY})
 endif()
 
-if (CMAKE_BUILD_TYPE STREQUAL "Release" AND GNUPLOT_FOUND AND BUILD_BENCHMARK)
+if (GNUPLOT_FOUND AND BUILD_BENCHMARK)
   # Enable the performance data-generation command only for Release builds.
 
   set(DATA_FILE_PERFORMANCE_JSON ${DATA_DIR}/performance.json)
