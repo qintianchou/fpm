@@ -27,6 +27,29 @@ if (NOT CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   set(BUILD_TESTS     OFF)
 endif()
 
+if (BUILD_BENCHMARK OR BUILD_TESTS)
+  include(FetchContent)
+endif()
+
+if (BUILD_BENCHMARK)
+  set(BENCHMARK_ENABLE_TESTING OFF)
+  FetchContent_Declare(
+    googlebenchmark
+    URL https://github.com/google/benchmark/archive/refs/tags/v1.8.4.zip
+  )
+  FetchContent_MakeAvailable(googlebenchmark)
+endif()
+
+if (BUILD_TESTS)
+  FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+  )
+  # For Windows: Prevent overriding the parent project's compiler/linker settings
+  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  FetchContent_MakeAvailable(googletest)
+endif()
+
 #
 # Test suite
 #
@@ -223,12 +246,4 @@ if (GNUPLOT_FOUND AND BUILD_BENCHMARK)
   )
 
   add_custom_target(fpm-performance-images DEPENDS ${IMG_FILE_PERFORMANCE})
-endif()
-
-if (BUILD_BENCHMARK)
-  add_subdirectory(3rdparty/googlebench)
-endif()
-
-if (BUILD_TESTS)
-  add_subdirectory(3rdparty/googletest)
 endif()
