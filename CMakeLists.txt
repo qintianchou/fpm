@@ -235,7 +235,7 @@ if (GNUPLOT_FOUND AND BUILD_BENCHMARK)
     COMMENT "Converting performance data for GnuPlot"
   )
 
-  set(IMG_FILE_PERFORMANCE "{$DATA_DIR}/performance.png")
+  set(IMG_FILE_PERFORMANCE ${DATA_DIR}/performance.png)
   add_custom_command(
     OUTPUT ${IMG_FILE_PERFORMANCE}
     COMMAND ${GNUPLOT_EXECUTABLE} ${PROJECT_SOURCE_DIR}/benchmarks/benchmark.gnuplot
