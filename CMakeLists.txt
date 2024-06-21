@@ -247,3 +247,6 @@ if (GNUPLOT_FOUND AND BUILD_BENCHMARK)
 
   add_custom_target(fpm-performance-images DEPENDS ${IMG_FILE_PERFORMANCE})
 endif()
+
+add_executable(quickstart quickstart.cpp)
+target_link_libraries(quickstart PRIVATE fpm)
